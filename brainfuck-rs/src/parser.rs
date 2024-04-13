@@ -27,12 +27,12 @@ pub fn parser(tokens: &[Token]) -> Vec<Operation> {
                 Token::DecrementData => Some(Operation::DecrementData),
                 Token::Print => Some(Operation::Print),
                 Token::Input => Some(Operation::Input),
-                Token::LoopOpen => {
+                Token::LoopBegin => {
                     loop_begin = position;
                     loop_depth += 1;
                     None
                 },
-                Token::LoopClose => {
+                Token::LoopEnd => {
                     eprintln!("\n    WTF: Fucking LoopOpen !!\n");
                     std::process::exit(1);
                 },
@@ -44,8 +44,8 @@ pub fn parser(tokens: &[Token]) -> Vec<Operation> {
             }
         } else {
             match token {
-                Token::LoopOpen => loop_depth += 1,
-                Token::LoopClose => {
+                Token::LoopBegin => loop_depth += 1,
+                Token::LoopEnd => {
                     loop_depth -= 1;
                     
                     if loop_depth == 0 {

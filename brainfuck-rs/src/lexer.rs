@@ -8,8 +8,8 @@ pub enum Token {
     DecrementData,
     Print,
     Input,
-    LoopOpen,
-    LoopClose,
+    LoopBegin,
+    LoopEnd,
 }
 
 pub fn lexer(code: String) -> Vec<Token> {
@@ -22,8 +22,8 @@ pub fn lexer(code: String) -> Vec<Token> {
             '-' => Some(Token::DecrementData),
             '.' => Some(Token::Print),
             ',' => Some(Token::Input),
-            '[' => Some(Token::LoopOpen),
-            ']' => Some(Token::LoopClose),
+            '[' => Some(Token::LoopBegin),
+            ']' => Some(Token::LoopEnd),
             _ => None,
         };
 
